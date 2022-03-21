@@ -19,7 +19,7 @@ def closeConnection(doc):
     PDFNet.Terminate()
 
 # Read All fields
-def updateFieldValue(doc, field_name, new_value, output_file):
+def updateFieldValue(doc, field_name, new_value):
     print("in updateFieldValue")
     print("************* Read all fields and types and print here *************")
     field = doc.GetField(field_name)
@@ -33,9 +33,7 @@ def updateFieldValue(doc, field_name, new_value, output_file):
             if field.GetType() == Field.e_text:
                 print("set text value")
                 field.SetValue(new_value)
-                print("save pdf to "+output_file)
-                doc.RefreshFieldAppearances()
-                doc.Save(output_file, 0)
+                print("save pdf to "+output_file)                
             elif field.GetType() == Field.e_check:
                 print("set True for checkbox ")
                 field.SetValue(new_value)
@@ -64,8 +62,8 @@ if __name__ == '__main__':
     if doc:
         print("call extract all fields")
         print("Update Filed(offer_prepared_date) value")
-        updateFieldValue(doc, 'offer_prepared_date', "2022-03-21", output_file)
-        updateFieldValue(doc, 'loan_cont_checkbox', True, "updated_check.pdf")
+        updateFieldValue(doc, 'offer_prepared_date', "2022-03-21")
+        updateFieldValue(doc, 'loan_cont_checkbox', True)
 
         print("save pdf to "+output_file)
         doc.RefreshFieldAppearances()
